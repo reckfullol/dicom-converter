@@ -6,22 +6,6 @@ import cv2
 import dicom
 import numpy as np
 
-
-# def convert_file(dcm_file_path, jpg_file_path):
-#     dicom_img = dicom.read_file(dcm_file_path)
-#     dicom_img.WindowCenter = -400
-#     dicom_img.WindowWidth = 1500
-#     img = dicom_img.pixel_array
-#     cv2.imwrite(jpg_file_path, img)
-
-# def convert_file(dcm_file_path, jpg_file_path):
-#     dicom_img = dicom.read_file(dcm_file_path)
-#     img = dicom_img.pixel_array
-#     window_center = -400
-#     window_width = 1500
-#     scaled_img = cv2.convertScaleAbs(img-window_center, alpha=(255.0 /window_width))
-#     cv2.imwrite(jpg_file_path, scaled_img)
-
 def convert_file(dcm_file_path, jpg_file_path):
     dicom_img = dicom.read_file(dcm_file_path)
     img = dicom_img.pixel_array
@@ -30,6 +14,7 @@ def convert_file(dcm_file_path, jpg_file_path):
 
 if __name__ == '__main__':
 	
+        #dicom files' path
 	rootdir = "D:\CT\A7"
 
 	for parent, dirnames, filenames in os.walk(rootdir):
@@ -37,6 +22,8 @@ if __name__ == '__main__':
 			if '.dcm' in filename.lower():
 				dicom_path = os.path.join(parent, filename)
 				name = dicom_path.replace('\\', '_')[3:]
-				jpg_path = "d:\CT_JPG\\%s.jpg" % name
+				
+                                #jpg files' path
+                                jpg_path = "d:\CT_JPG\\%s.jpg" % name
 				print (jpg_path)
 				convert_file(dicom_path, jpg_path)
